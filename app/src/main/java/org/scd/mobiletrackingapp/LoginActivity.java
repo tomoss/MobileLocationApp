@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     if (response.isSuccessful()) {
                         ResUser resUser = (ResUser) response.body();
-                        Intent intent = new Intent(LoginActivity.this, LocationActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
                         intent.putExtra("email", resUser.getEmail());
                         startActivity(intent);
                     }
