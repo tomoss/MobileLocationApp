@@ -4,6 +4,8 @@ import com.google.gson.JsonObject;
 
 import org.scd.mobiletrackingapp.model.ResUser;
 import org.scd.mobiletrackingapp.model.UserLogin;
+import org.scd.mobiletrackingapp.model.UserRegister;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
@@ -14,7 +16,7 @@ public interface UserService {
     @POST("users/login")
     Call<ResUser> login(@Body UserLogin userLogin, @Header("Authorization") String credentials);
 
-   // @POST("users/register")
-    //Call<ResUser> register()
+    @POST("users/register")
+    Call<ResUser> register(@Body UserRegister userRegister);
 
 }

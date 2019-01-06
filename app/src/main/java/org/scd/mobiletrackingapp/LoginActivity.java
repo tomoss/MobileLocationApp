@@ -78,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
 
         String BASE_URL = "http://192.168.100.2:8080/";
         RetrofitClient client = new RetrofitClient(BASE_URL);
-        //Call call = userService.login(userLogin, credentials);
         client.getServices().login(userLogin, credentials).enqueue(new Callback<ResUser>() {
             @Override
             public void onResponse(Call call, Response response) {
