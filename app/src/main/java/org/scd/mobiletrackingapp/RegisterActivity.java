@@ -77,11 +77,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void doRegister(String email, String password, String firstName, String lastName){
 
-        String credentials = Credentials.basic(email,password);
+
 
         UserRegister userRegister = new UserRegister();
         userRegister.setEmail(email);
-        userRegister.setPassword(credentials);
+        userRegister.setPassword(password);
         userRegister.setFirstName(firstName);
         userRegister.setLastName(lastName);
 
