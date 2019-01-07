@@ -85,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
         userRegister.setFirstName(firstName);
         userRegister.setLastName(lastName);
 
-        String BASE_URL = "http://192.168.100.2:8080/";
+        String BASE_URL = "http://192.168.137.1:8080/";
         RetrofitClient client = new RetrofitClient(BASE_URL);
 
         client.getServices().register(userRegister).enqueue(new Callback<ResUser>() {

@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         UserLoginDTO userLogin = new UserLoginDTO(email,password);
         final String credentials = Credentials.basic(email,password);
 
-        String BASE_URL = "http://192.168.100.2:8080/";
+        String BASE_URL = "http://192.168.137.1:8080/";
         RetrofitClient client = new RetrofitClient(BASE_URL);
         client.getServices().login(userLogin, credentials).enqueue(new Callback<ResUser>() {
             @Override

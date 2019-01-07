@@ -148,7 +148,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationDTO.setLatitude(latitude);
         locationDTO.setLongitude(longitude);
 
-        String BASE_URL = "http://192.168.100.2:8080/";
+        String BASE_URL = "http://192.168.137.1:8080/";
         RetrofitClient client = new RetrofitClient(BASE_URL);
 
         Bundle extras = getIntent().getExtras();
