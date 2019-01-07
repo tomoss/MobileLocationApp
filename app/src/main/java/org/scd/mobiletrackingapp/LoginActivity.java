@@ -17,7 +17,7 @@ import org.scd.mobiletrackingapp.model.ResUser;
 import org.scd.mobiletrackingapp.remote.RetrofitClient;
 import org.scd.mobiletrackingapp.remote.UserService;
 
-import org.scd.mobiletrackingapp.model.UserLogin;
+import org.scd.mobiletrackingapp.model.dto.UserLoginDTO;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -73,8 +73,8 @@ public class LoginActivity extends AppCompatActivity {
     private void doLogin(final String email,final String password){
 
 
-        UserLogin userLogin = new UserLogin(email,password);
-        String credentials = Credentials.basic(email,password);
+        UserLoginDTO userLogin = new UserLoginDTO(email,password);
+        final String credentials = Credentials.basic(email,password);
 
         String BASE_URL = "http://192.168.100.2:8080/";
         RetrofitClient client = new RetrofitClient(BASE_URL);
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         ResUser resUser = (ResUser) response.body();
                         Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
-                        intent.putExtra("email", resUser.getEmail());
+                        intent.putExtra("credentials",credentials);
                         startActivity(intent);
                     }
                 } else {

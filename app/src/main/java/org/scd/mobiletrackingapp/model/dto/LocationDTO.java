@@ -1,5 +1,4 @@
-package org.scd.mobiletrackingapp.model;
-
+package org.scd.mobiletrackingapp.model.dto;
 
 public class LocationDTO {
 
@@ -30,4 +29,3 @@ public class LocationDTO {
         this.longitude = longitude;
     }
 }
-

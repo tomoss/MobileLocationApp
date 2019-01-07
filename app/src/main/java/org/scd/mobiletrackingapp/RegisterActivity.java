@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.scd.mobiletrackingapp.model.ResUser;
-import org.scd.mobiletrackingapp.model.UserRegister;
+import org.scd.mobiletrackingapp.model.dto.UserRegisterDTO;
 import org.scd.mobiletrackingapp.remote.RetrofitClient;
 
 import okhttp3.Credentials;
@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        UserRegister userRegister = new UserRegister();
+        UserRegisterDTO userRegister = new UserRegisterDTO();
         userRegister.setEmail(email);
         userRegister.setPassword(password);
         userRegister.setFirstName(firstName);

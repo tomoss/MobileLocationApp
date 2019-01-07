@@ -1,16 +1,16 @@
-package org.scd.mobiletrackingapp.model;
+package org.scd.mobiletrackingapp.model.dto;
 
-public class UserRegister {
+public class UserRegisterDTO {
 
     private String email;
     private String password;
     private String firstName;
     private String lastName;
 
-    public UserRegister() {
+    public UserRegisterDTO() {
     }
 
-    public UserRegister(String email, String password, String firstName, String lastName) {
+    public UserRegisterDTO(String email, String password, String firstName, String lastName) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;

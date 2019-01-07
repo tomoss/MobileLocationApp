@@ -1,15 +1,14 @@
 package org.scd.mobiletrackingapp;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,7 +20,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.scd.mobiletrackingapp.model.LocationDTO;
+import org.scd.mobiletrackingapp.model.ResLocation;
+import org.scd.mobiletrackingapp.model.dto.LocationDTO;
+import org.scd.mobiletrackingapp.remote.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -32,13 +37,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     Button btnSend;
 
-  Double longitude = 100.0;
-  Double latitude = 100.0;
+   Double longitude = 0.0;
+   Double latitude = 0.0;
 
-  String latitudeS;
-  String longitudeS;
-
-    private Handler m_timerHandler = new Handler();
+   String latitudeS;
+   String longitudeS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +77,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
 
-                LatLng sydney = new LatLng(latitude, longitude);
-                mMap.addMarker(new MarkerOptions().position(sydney).title("HERE"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                LatLng loc = new LatLng(latitude, longitude);
+                mMap.addMarker(new MarkerOptions().position(loc).title("You are here"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
                 mMap.animateCamera( CameraUpdateFactory.zoomTo( 12.0f ) );
 
             }
@@ -144,6 +147,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationDTO locationDTO = new LocationDTO();
         locationDTO.setLatitude(latitude);
         locationDTO.setLongitude(longitude);
+
+        String BASE_URL = "http://192.168.100.2:8080/";
+        RetrofitClient client = new RetrofitClient(BASE_URL);
+
+        Bundle extras = getIntent().getExtras();
+
+        String credentials = extras.getString("credentials");;
+
+
+        client.getServices().addLocation(locationDTO,credentials).enqueue(new Callback<ResLocation>(){
+            @Override
+            public void onResponse(Call call, Response response) {
+                if (response.code() == 200) {
+                    if (response.isSuccessful()) {
+                        ResLocation resLocation = (ResLocation) response.body();
+                        Toast.makeText(MapsActivity.this, "longitude: "+resLocation.getLongitude()+" latitude: "+resLocation.getLatitude()+
+                                "\n"+resLocation.getUser().getEmail(), Toast.LENGTH_LONG).show();
+
+                    }
+                } else {
+                    Toast.makeText(MapsActivity.this, "The email or password is incorrect", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Toast.makeText(MapsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+
+
+        });
 
 
     }
