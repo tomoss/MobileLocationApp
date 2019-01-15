@@ -17,9 +17,9 @@ public class ResLocation {
     @Expose
     private double longitude;
 
-    @SerializedName("user")
+    @SerializedName("userEmail")
     @Expose
-    private ResUser user;
+    private String userEmail;
 
     public Long getId() {
         return id;
@@ -45,11 +45,11 @@ public class ResLocation {
         this.longitude = longitude;
     }
 
-    public ResUser getUser() {
-        return user;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUser(ResUser user) {
-        this.user = user;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }

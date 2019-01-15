@@ -163,7 +163,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (response.isSuccessful()) {
                         ResLocation resLocation = (ResLocation) response.body();
                         Toast.makeText(MapsActivity.this, "longitude: "+resLocation.getLongitude()+" latitude: "+resLocation.getLatitude()+
-                                "\n"+resLocation.getUser().getEmail(), Toast.LENGTH_LONG).show();
+                                "\n"+resLocation.getUserEmail(), Toast.LENGTH_LONG).show();
 
                     }
                 } else {
