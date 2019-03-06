@@ -167,7 +167,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     }
                 } else {
-                    Toast.makeText(MapsActivity.this, "The email or password is incorrect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, "The email or password are incorrect", Toast.LENGTH_SHORT).show();
                 }
 
             }
